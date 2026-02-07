@@ -1,5 +1,9 @@
-SKSEPluginLoad(const SKSE::LoadInterface *skse) {
-    SKSE::Init(skse);
+#include "RE/Skyrim.h"
+#include "SKSE/SKSE.h"
+
+namespace PickpocketCriminals {
+
+    struct MenuOpenCloseSink;
 
     struct MenuOpenCloseSink : public RE::BSTEventSink<RE::MenuOpenCloseEvent> {
         RE::BSEventNotifyControl ProcessEvent(const RE::MenuOpenCloseEvent* a_event,
@@ -46,11 +50,6 @@ SKSEPluginLoad(const SKSE::LoadInterface *skse) {
             }
 
             auto player = RE::PlayerCharacter::GetSingleton();
-            if (player) {
-                if (!actor->IsHostileToActor(player)) {
-                    return RE::BSEventNotifyControl::kContinue;
-                }
-            }
 
             const auto inventory = actor->GetInventory();
             for (auto& kv : inventory) {
@@ -72,6 +71,7 @@ SKSEPluginLoad(const SKSE::LoadInterface *skse) {
 
                 for (auto extraIt = entry->extraLists->begin(); extraIt != entry->extraLists->end(); ++extraIt) {
                     RE::ExtraDataList* extra = *extraIt;
+
                     if (!extra) {
                         continue;
                     }
@@ -87,14 +87,18 @@ SKSEPluginLoad(const SKSE::LoadInterface *skse) {
 
     static MenuOpenCloseSink g_menuOpenCloseSink;
 
-    SKSE::GetMessagingInterface()->RegisterListener([](SKSE::MessagingInterface::Message *message) {
-        if (message->type == SKSE::MessagingInterface::kDataLoaded) {
-            if (auto ui = RE::UI::GetSingleton()) {
-                ui->AddEventSink(&g_menuOpenCloseSink);
+    SKSEPluginLoad(const SKSE::LoadInterface* skse) {
+        SKSE::Init(skse);
+
+        SKSE::GetMessagingInterface()->RegisterListener([](SKSE::MessagingInterface::Message* message) {
+            if (message->type == SKSE::MessagingInterface::kDataLoaded) {
+                if (auto ui = RE::UI::GetSingleton()) {
+                    ui->AddEventSink(&g_menuOpenCloseSink);
+                }
             }
-        }
-    });
+        });
 
-    return true;
+        return true;
+    }
+
 }
-
