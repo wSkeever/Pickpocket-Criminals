@@ -1,8 +1,23 @@
 {
-    "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
-    "name": "pickpocket-criminals",
-    "version-string": "0.0.1",
-    "dependencies": [
-        "commonlibsse-ng"
-    ]
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg/master/scripts/vcpkg.schema.json",
+  "name": "pickpocket-criminals",
+  "version-string": "1.0.0",
+  "port-version": 0,
+  "description": "Make pickpocketing criminals not a crime.",
+  "homepage": "https://www.skyrimng.com",
+  "license": "Apache-2.0",
+  "features": {
+    "plugin": {
+      "description": "Build the SKSE plugin.",
+      "dependencies": [
+        "commonlibsse-ng",
+        "directxmath",
+        "directxtk",
+        "openvr"
+      ]
+    }
+  },
+  "default-features": [
+    "plugin"
+  ]
 }
