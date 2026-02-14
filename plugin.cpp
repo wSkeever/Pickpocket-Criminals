@@ -70,11 +70,11 @@ namespace PickpocketCriminals {
             if (!entryOwner) {
                 continue;
             }
-            const auto entryOwnerBase = entryOwner->As<TESNPC>();
-            if (!entryOwnerBase) {
+            const auto entryOwnerActorBase = entryOwner->As<TESNPC>();
+            if (!entryOwnerActorBase) {
                 continue;
             }
-            if (entryOwnerBase->crimeFaction) {
+            if (entryOwnerActorBase->crimeFaction) {
                 continue;
             }
             for (auto* extraList : *entry->extraLists) {
