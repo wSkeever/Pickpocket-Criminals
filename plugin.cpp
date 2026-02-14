@@ -94,7 +94,7 @@ namespace PickpocketCriminals {
             }
             const auto fromRef = TESObjectREFR::LookupByID(a_event->oldContainer);
             const auto toRef = TESObjectREFR::LookupByID(a_event->newContainer);
-            if (IsPickpocketingCriminal(fromRef, toRef)) {
+            if (IsPickpocketingCriminal(toRef, fromRef)) {
                 const auto itemBase = TESObjectREFR::LookupByID(a_event->baseObj);
                 ClearOwnership(toRef, fromRef, itemBase);
             }
