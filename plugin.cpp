@@ -117,6 +117,7 @@ namespace PickpocketCriminals {
             if (message->type == SKSE::MessagingInterface::kDataLoaded) {
                 InstallIsStealingContainerHook();
                 InstallContainerChangedSink();
+                SKSE::log::info("Data loaded, hooks installed.");
             }
         });
 
