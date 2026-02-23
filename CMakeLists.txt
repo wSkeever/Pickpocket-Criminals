@@ -6,7 +6,7 @@ message("Using toolchain file ${CMAKE_TOOLCHAIN_FILE}.")
 ########################################################################################################################
 project(
         PickpocketCriminals
-        VERSION 0.1.1
+        VERSION 0.1.2
         DESCRIPTION "Make pickpocketing criminals not a crime."
         LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
