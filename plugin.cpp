@@ -36,6 +36,10 @@ namespace PickpocketCriminals {
     }
 
     void InstallIsStealingContainerHook() {
+        if (REL::Module::IsVR()) {
+            SKSE::log::info("Skipping IsStealingContainer hook for VR.");
+            return;
+        }
         REL::RelocationID hook{50231, 51160, 50231};
         ptrdiff_t offset = REL::VariantOffset(0x14D, 0x135, 0x14D).offset();
         auto& trampoline = SKSE::GetTrampoline();
